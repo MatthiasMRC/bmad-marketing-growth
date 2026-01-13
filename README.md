@@ -1,10 +1,13 @@
 # Marketing Growth Suite
 
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Support-yellow?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/matthiasmrc)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
 > Complete AI-powered marketing team for SaaS growth
 
 **Version:** 1.0.0
 **Module Code:** `marketing-growth`
-**Author:** BMad Framework
+**Author:** Matthias ([@matthias_mrc](https://x.com/matthias_mrc))
 
 ---
 
@@ -214,7 +217,13 @@ primary_channel: "twitter"  # twitter, linkedin, youtube, instagram, tiktok
 
 ## Support
 
-For issues or feature requests, contact the BMAD community or reach out on X.
+If this module saves you time, consider buying me a coffee!
+
+<a href="https://buymeacoffee.com/matthiasmrc" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50">
+</a>
+
+For issues or feature requests, reach out on X [@matthias_mrc](https://x.com/matthias_mrc).
 
 ---
 
