@@ -21,7 +21,7 @@ The Marketing Growth Suite is a comprehensive BMAD module that provides a full A
 - **6 Coordinated Workflows** with cross-agent delegation
 - **Multi-platform Social Media** coverage (8 platforms)
 - **Expert Agents with Memory** (sidecars for learning)
-- **multi-language** support
+- **Multi-language** support
 
 ---
 
