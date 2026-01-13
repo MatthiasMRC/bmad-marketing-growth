@@ -1,0 +1,318 @@
+# Social Media Campaign Workflow
+# Trigger: SC
+# Lead: Nova Reach (Social Media Strategist)
+# Description: Stratégie → Création → Publication multi-plateforme
+
+workflow:
+  id: social-campaign
+  name: "Social Media Campaign"
+  version: "1.0.0"
+  trigger: "SC"
+  lead_agent: social-media-strategist
+  description: |
+    Multi-platform social media campaign workflow.
+    From strategy to creation to coordinated publication across channels.
+
+# Workflow Phases
+phases:
+  # === PHASE 1: STRATÉGIE ===
+  - id: strategy
+    name: "Campaign Strategy"
+    description: "Define campaign goals, platforms, and approach"
+    steps:
+      - id: campaign-brief
+        name: "Campaign Brief"
+        agent: social-media-strategist
+        action: |
+          Gather campaign requirements:
+          - Campaign objective (awareness, engagement, traffic, leads)
+          - Target audience
+          - Key message/offer
+          - Timeline (start/end dates)
+          - Budget (if paid)
+          - Success metrics
+        output: "campaign-brief.md"
+
+      - id: platform-selection
+        name: "Platform Strategy"
+        agent: social-media-strategist
+        action: |
+          Determine platform mix:
+          - Primary platforms (2-3)
+          - Secondary platforms
+          - Platform-specific goals
+          - Resource allocation per platform
+        output: "platform-strategy.md"
+
+      - id: content-calendar
+        name: "Content Calendar"
+        agent: social-media-strategist
+        action: |
+          Create campaign calendar:
+          - Posting schedule per platform
+          - Content themes by day/week
+          - Key dates and moments
+          - Hashtag strategy
+        output: "content-calendar.md"
+
+      - id: strategy-approval
+        name: "Strategy Approval"
+        agent: social-media-strategist
+        action: |
+          Present strategy to user:
+          - Review platform approach
+          - Validate calendar
+          - Confirm resources
+          - Get approval
+        gate: "user_approval"
+
+  # === PHASE 2: CRÉATION ===
+  - id: creation
+    name: "Content Creation"
+    description: "Create platform-specific content"
+    steps:
+      - id: twitter-content
+        name: "Twitter/X Content"
+        agent: twitter-ghostwriter
+        delegates_to: twitter-ghostwriter
+        condition: "platforms.includes('twitter')"
+        action: |
+          Create Twitter content:
+          - Tweets (10-20)
+          - Thread concepts (2-3)
+          - Engagement reply templates
+          - Hashtag sets
+        output: "twitter-content.md"
+
+      - id: linkedin-content
+        name: "LinkedIn Content"
+        agent: linkedin-creator
+        delegates_to: linkedin-creator
+        condition: "platforms.includes('linkedin')"
+        action: |
+          Create LinkedIn content:
+          - Posts (5-10)
+          - Carousel concepts
+          - Article outlines
+          - Engagement strategy
+        output: "linkedin-content.md"
+
+      - id: instagram-content
+        name: "Instagram Content"
+        agent: instagram-strategist
+        delegates_to: instagram-strategist
+        condition: "platforms.includes('instagram')"
+        action: |
+          Create Instagram content:
+          - Feed posts (5-10)
+          - Reel concepts (3-5)
+          - Story templates
+          - Carousel designs
+        output: "instagram-content.md"
+
+      - id: tiktok-content
+        name: "TikTok Content"
+        agent: tiktok-creator
+        delegates_to: tiktok-creator
+        condition: "platforms.includes('tiktok')"
+        action: |
+          Create TikTok content:
+          - Video concepts (5-10)
+          - Trend adaptations
+          - Hook variations
+          - Sound selections
+        output: "tiktok-content.md"
+
+      - id: youtube-content
+        name: "YouTube Content"
+        agent: youtube-strategist
+        delegates_to: youtube-strategist
+        condition: "platforms.includes('youtube')"
+        action: |
+          Create YouTube content:
+          - Shorts concepts (5-10)
+          - Video scripts
+          - Thumbnail briefs
+          - Description templates
+        output: "youtube-content.md"
+
+      - id: reddit-content
+        name: "Reddit Content"
+        agent: reddit-growth-hacker
+        delegates_to: reddit-growth-hacker
+        condition: "platforms.includes('reddit')"
+        action: |
+          Create Reddit strategy:
+          - Target subreddits
+          - Post concepts
+          - Comment templates
+          - Engagement plan
+        output: "reddit-content.md"
+
+      - id: discord-content
+        name: "Discord Content"
+        agent: discord-community-manager
+        delegates_to: discord-community-manager
+        condition: "platforms.includes('discord')"
+        action: |
+          Create Discord content:
+          - Announcement templates
+          - Event concepts
+          - Engagement activities
+        output: "discord-content.md"
+
+      - id: pinterest-content
+        name: "Pinterest Content"
+        agent: pinterest-strategist
+        delegates_to: pinterest-strategist
+        condition: "platforms.includes('pinterest')"
+        action: |
+          Create Pinterest content:
+          - Pin concepts (10-20)
+          - Board strategy
+          - Description templates
+          - Keyword optimization
+        output: "pinterest-content.md"
+
+      - id: content-review
+        name: "Content Review"
+        agent: social-media-strategist
+        action: |
+          Consolidate and review:
+          - Review all platform content
+          - Ensure brand consistency
+          - Verify messaging alignment
+          - Present for approval
+        gate: "user_approval"
+        output: "content-package.md"
+
+  # === PHASE 3: PUBLICATION ===
+  - id: publication
+    name: "Campaign Publication"
+    description: "Execute coordinated publication"
+    steps:
+      - id: scheduling
+        name: "Schedule Content"
+        agent: social-media-strategist
+        action: |
+          Schedule all content:
+          - Input into scheduling tools
+          - Verify posting times
+          - Set up cross-platform coordination
+          - Enable monitoring alerts
+        output: "scheduling-confirmation.md"
+
+      - id: launch
+        name: "Campaign Launch"
+        agent: social-media-strategist
+        action: |
+          Launch campaign:
+          - Activate scheduled posts
+          - Monitor initial engagement
+          - Respond to early interactions
+          - Document any issues
+        output: "launch-report.md"
+
+      - id: daily-engagement
+        name: "Daily Engagement"
+        agent: social-media-strategist
+        recurring: true
+        action: |
+          Daily engagement tasks:
+          - Respond to comments
+          - Engage with audience
+          - Monitor mentions
+          - Adjust strategy if needed
+        output: "engagement-log.md"
+
+  # === PHASE 4: ANALYSE ===
+  - id: analysis
+    name: "Campaign Analysis"
+    description: "Measure and report on campaign performance"
+    steps:
+      - id: mid-campaign-check
+        name: "Mid-Campaign Review"
+        agent: growth-analyst
+        delegates_to: growth-analyst
+        trigger: "campaign_midpoint"
+        action: |
+          Mid-campaign analysis:
+          - Performance vs. targets
+          - Top performing content
+          - Underperforming areas
+          - Optimization recommendations
+        output: "mid-campaign-report.md"
+
+      - id: final-report
+        name: "Campaign Final Report"
+        agent: growth-analyst
+        delegates_to: growth-analyst
+        trigger: "campaign_end"
+        action: |
+          Comprehensive final report:
+          - Overall performance
+          - Platform breakdown
+          - ROI analysis
+          - Learnings and insights
+          - Recommendations for next campaign
+        output: "campaign-final-report.md"
+
+# Workflow Outputs
+outputs:
+  primary: "campaign-final-report.md"
+  supporting:
+    - "campaign-brief.md"
+    - "platform-strategy.md"
+    - "content-calendar.md"
+    - "content-package.md"
+    - "launch-report.md"
+    - "mid-campaign-report.md"
+
+# Supported Platforms
+platforms:
+  primary:
+    - twitter
+    - linkedin
+    - instagram
+  secondary:
+    - tiktok
+    - youtube
+    - reddit
+    - discord
+    - pinterest
+
+# Campaign Types
+campaign_types:
+  - id: awareness
+    name: "Brand Awareness"
+    focus: "Reach and impressions"
+    duration: "2-4 weeks"
+
+  - id: engagement
+    name: "Engagement Campaign"
+    focus: "Comments, shares, saves"
+    duration: "1-2 weeks"
+
+  - id: traffic
+    name: "Traffic Campaign"
+    focus: "Clicks and visits"
+    duration: "2-4 weeks"
+
+  - id: lead-gen
+    name: "Lead Generation"
+    focus: "Signups and conversions"
+    duration: "2-4 weeks"
+
+  - id: launch
+    name: "Product Launch"
+    focus: "Buzz and conversions"
+    duration: "3-4 weeks"
+
+# Success Criteria
+success_criteria:
+  - "Platform strategy defined and approved"
+  - "Content created for all selected platforms"
+  - "Campaign launched on schedule"
+  - "Daily engagement maintained"
+  - "Performance metrics tracked"
+  - "Final report delivered"

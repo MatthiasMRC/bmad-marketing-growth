@@ -1,0 +1,378 @@
+# SEO Sprint Workflow
+# Trigger: SS
+# Lead: Quinn Crawler (SEO Strategist)
+# Description: Audit → Keywords → Content gaps → Quick wins
+
+workflow:
+  id: seo-sprint
+  name: "SEO Sprint"
+  version: "1.0.0"
+  trigger: "SS"
+  lead_agent: seo-strategist
+  description: |
+    Focused SEO optimization sprint workflow.
+    From audit to actionable quick wins in a structured approach.
+
+# Sprint Duration
+duration:
+  typical: "2 weeks"
+  phases:
+    audit: "2-3 days"
+    strategy: "2-3 days"
+    execution: "5-7 days"
+    review: "1-2 days"
+
+# Workflow Phases
+phases:
+  # === PHASE 1: AUDIT ===
+  - id: audit
+    name: "SEO Audit"
+    description: "Comprehensive SEO health check"
+    steps:
+      - id: technical-audit
+        name: "Technical SEO Audit"
+        agent: seo-strategist
+        action: |
+          Analyze technical health:
+          - Site speed (Core Web Vitals)
+          - Mobile-friendliness
+          - Crawlability (robots.txt, sitemap)
+          - Indexation status
+          - Schema markup
+          - SSL/HTTPS
+          - URL structure
+          - Internal linking
+        output: "technical-audit.md"
+
+      - id: on-page-audit
+        name: "On-Page SEO Audit"
+        agent: seo-strategist
+        action: |
+          Analyze on-page elements:
+          - Title tags
+          - Meta descriptions
+          - Header structure (H1-H6)
+          - Content quality
+          - Keyword usage
+          - Image optimization
+          - Internal links
+        output: "on-page-audit.md"
+
+      - id: off-page-audit
+        name: "Off-Page SEO Audit"
+        agent: seo-strategist
+        action: |
+          Analyze off-page factors:
+          - Backlink profile
+          - Domain authority
+          - Referring domains
+          - Anchor text distribution
+          - Toxic links
+          - Competitor backlinks
+        output: "off-page-audit.md"
+
+      - id: content-audit
+        name: "Content SEO Audit"
+        agent: seo-strategist
+        action: |
+          Analyze content:
+          - Top performing pages
+          - Underperforming pages
+          - Content freshness
+          - Thin content
+          - Duplicate content
+          - Cannibalization issues
+        output: "content-seo-audit.md"
+
+  # === PHASE 2: KEYWORDS ===
+  - id: keywords
+    name: "Keyword Strategy"
+    description: "Define target keyword strategy"
+    steps:
+      - id: current-rankings
+        name: "Current Rankings Analysis"
+        agent: seo-strategist
+        action: |
+          Analyze current rankings:
+          - Keywords ranking (positions 1-100)
+          - Traffic by keyword
+          - Ranking trends
+          - SERP features
+          - Branded vs. non-branded
+        output: "current-rankings.md"
+
+      - id: keyword-research
+        name: "Keyword Research"
+        agent: seo-strategist
+        action: |
+          Research new opportunities:
+          - Head terms (high volume)
+          - Long-tail keywords
+          - Question keywords
+          - Competitor keywords
+          - Search intent analysis
+        output: "keyword-research.md"
+
+      - id: keyword-mapping
+        name: "Keyword Mapping"
+        agent: seo-strategist
+        action: |
+          Map keywords to content:
+          - Primary keyword per page
+          - Secondary keywords
+          - New pages needed
+          - Optimization priorities
+        output: "keyword-mapping.md"
+
+      - id: competitor-keywords
+        name: "Competitor Keyword Analysis"
+        agent: seo-strategist
+        action: |
+          Analyze competitor keywords:
+          - Keywords they rank for
+          - Keywords we don't target
+          - Difficulty assessment
+          - Opportunity scoring
+        output: "competitor-keywords.md"
+
+  # === PHASE 3: CONTENT GAPS ===
+  - id: content-gaps
+    name: "Content Gap Analysis"
+    description: "Identify content opportunities"
+    steps:
+      - id: gap-analysis
+        name: "Content Gap Identification"
+        agent: seo-strategist
+        action: |
+          Identify gaps:
+          - Topics competitors cover
+          - Questions not answered
+          - Search intent mismatches
+          - Format gaps
+          - Depth gaps
+        output: "content-gaps.md"
+
+      - id: content-opportunities
+        name: "Content Opportunity Scoring"
+        agent: seo-strategist
+        action: |
+          Score opportunities:
+          - Search volume
+          - Difficulty
+          - Business relevance
+          - Effort required
+          - Priority ranking
+        output: "content-opportunities.md"
+
+      - id: content-briefs
+        name: "Priority Content Briefs"
+        agent: content-architect
+        delegates_to: content-architect
+        action: |
+          Create briefs for top 5 opportunities:
+          - Target keyword
+          - Search intent
+          - Content outline
+          - Competitor analysis
+          - Word count target
+        output: "priority-content-briefs.md"
+
+  # === PHASE 4: QUICK WINS ===
+  - id: quick-wins
+    name: "Quick Wins Execution"
+    description: "Implement high-impact, low-effort optimizations"
+    steps:
+      - id: identify-quick-wins
+        name: "Identify Quick Wins"
+        agent: seo-strategist
+        action: |
+          Find quick wins:
+          - Pages ranking 11-20 (push to page 1)
+          - Missing meta descriptions
+          - Title tag optimizations
+          - Internal linking opportunities
+          - Image alt text
+          - Schema markup additions
+          - Broken links
+        output: "quick-wins-list.md"
+
+      - id: title-meta-optimization
+        name: "Title & Meta Optimization"
+        agent: seo-strategist
+        action: |
+          Optimize titles and metas:
+          - Review current titles
+          - Write optimized titles
+          - Write compelling metas
+          - Include target keywords
+          - Character count check
+        output: "title-meta-optimizations.md"
+
+      - id: internal-linking
+        name: "Internal Linking Sprint"
+        agent: seo-strategist
+        action: |
+          Improve internal linking:
+          - Identify orphan pages
+          - Add contextual links
+          - Create topic clusters
+          - Update navigation
+          - Add related posts
+        output: "internal-linking-plan.md"
+
+      - id: technical-fixes
+        name: "Technical Quick Fixes"
+        agent: seo-strategist
+        action: |
+          Implement technical fixes:
+          - Fix broken links
+          - Optimize images
+          - Add schema markup
+          - Fix crawl errors
+          - Improve page speed
+        output: "technical-fixes.md"
+
+      - id: content-refreshes
+        name: "Content Refreshes"
+        agent: content-architect
+        delegates_to: content-architect
+        action: |
+          Update existing content:
+          - Refresh outdated content
+          - Add missing keywords
+          - Improve content depth
+          - Update statistics
+          - Enhance formatting
+        output: "content-refreshes.md"
+
+  # === PHASE 5: SPRINT REVIEW ===
+  - id: review
+    name: "Sprint Review"
+    description: "Review progress and plan next steps"
+    steps:
+      - id: implementation-summary
+        name: "Implementation Summary"
+        agent: seo-strategist
+        action: |
+          Document completed work:
+          - Changes implemented
+          - Pages optimized
+          - Content created
+          - Technical fixes applied
+          - Expected impact
+        output: "implementation-summary.md"
+
+      - id: tracking-setup
+        name: "Tracking & Monitoring"
+        agent: seo-strategist
+        action: |
+          Set up tracking:
+          - Keyword rank tracking
+          - Traffic monitoring
+          - Conversion tracking
+          - Baseline metrics
+          - Alert setup
+        output: "tracking-setup.md"
+
+      - id: sprint-report
+        name: "Sprint Report"
+        agent: seo-strategist
+        action: |
+          Create sprint report:
+          - Work completed
+          - Before/after metrics
+          - Outstanding items
+          - Next sprint priorities
+          - Long-term roadmap
+        output: "seo-sprint-report.md"
+
+      - id: next-sprint-planning
+        name: "Next Sprint Planning"
+        agent: seo-strategist
+        action: |
+          Plan next sprint:
+          - Carryover items
+          - New priorities
+          - Resource needs
+          - Timeline
+        output: "next-sprint-plan.md"
+
+# Workflow Outputs
+outputs:
+  primary: "seo-sprint-report.md"
+  supporting:
+    - "technical-audit.md"
+    - "on-page-audit.md"
+    - "keyword-research.md"
+    - "content-gaps.md"
+    - "quick-wins-list.md"
+    - "implementation-summary.md"
+
+# Sprint Types
+sprint_types:
+  - id: full-sprint
+    name: "Full SEO Sprint"
+    focus: "All areas"
+    duration: "2 weeks"
+
+  - id: technical-sprint
+    name: "Technical SEO Sprint"
+    focus: "Technical fixes"
+    duration: "1 week"
+
+  - id: content-sprint
+    name: "Content SEO Sprint"
+    focus: "Content optimization"
+    duration: "1 week"
+
+  - id: link-sprint
+    name: "Link Building Sprint"
+    focus: "Backlinks"
+    duration: "2 weeks"
+
+# Quick Win Categories
+quick_wins:
+  high_impact_low_effort:
+    - "Meta title/description optimization"
+    - "Internal linking improvements"
+    - "Schema markup addition"
+    - "Image alt text optimization"
+    - "Broken link fixes"
+
+  medium_impact_medium_effort:
+    - "Content updates"
+    - "Header tag optimization"
+    - "Page speed improvements"
+    - "URL redirects"
+
+  high_impact_high_effort:
+    - "New content creation"
+    - "Site structure changes"
+    - "Core Web Vitals fixes"
+    - "Link building"
+
+# Success Metrics
+success_metrics:
+  immediate:
+    - "Technical issues fixed"
+    - "Pages optimized"
+    - "Content published"
+
+  30_day:
+    - "Ranking improvements"
+    - "Organic traffic increase"
+    - "Indexation status"
+
+  90_day:
+    - "Keyword position gains"
+    - "Traffic growth"
+    - "Conversion improvements"
+
+# Success Criteria
+success_criteria:
+  - "Technical audit completed"
+  - "Keyword strategy defined"
+  - "Content gaps identified"
+  - "Quick wins implemented"
+  - "Tracking set up"
+  - "Sprint report delivered"

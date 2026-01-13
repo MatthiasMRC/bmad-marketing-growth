@@ -1,0 +1,220 @@
+# Marketing Growth Module
+# Version: 1.0.0
+# BMAD Module Configuration
+
+code: marketing-growth
+name: "Marketing Growth Suite"
+header: "Complete AI-powered marketing team for SaaS growth"
+subheader: "14 specialized agents + 6 coordinated workflows for end-to-end marketing"
+version: "1.0.0"
+default_selected: false
+
+# Module Metadata
+author: "BMad Framework"
+license: "MIT"
+tags:
+  - marketing
+  - growth
+  - social-media
+  - content
+  - seo
+  - saas
+
+# Dependencies
+dependencies:
+  - core  # BMAD Core required
+
+# Installation Configuration
+install:
+  questions:
+    - var: user_name
+      prompt: "What's your name?"
+      type: text
+      default: "Marketing Lead"
+
+    - var: communication_language
+      prompt: "Preferred communication language?"
+      type: select
+      options:
+        - label: "English"
+          value: "English"
+        - label: "Français"
+          value: "French"
+        - label: "Español"
+          value: "Spanish"
+      default: "French"
+
+    - var: company_name
+      prompt: "Your company/product name?"
+      type: text
+      default: "My SaaS"
+
+    - var: primary_channel
+      prompt: "Primary social media channel?"
+      type: select
+      options:
+        - label: "Twitter/X"
+          value: "twitter"
+        - label: "LinkedIn"
+          value: "linkedin"
+        - label: "YouTube"
+          value: "youtube"
+        - label: "Instagram"
+          value: "instagram"
+        - label: "TikTok"
+          value: "tiktok"
+      default: "twitter"
+
+# Module Components
+components:
+  agents:
+    # Tier 1: Orchestrator
+    - id: marketing-orchestrator
+      name: "Max Growth"
+      title: "Marketing Orchestrator"
+      icon: "🎯"
+      tier: 1
+      hasSidecar: true
+
+    # Tier 2: Department Leads
+    - id: content-architect
+      name: "Milo Page"
+      title: "Content Architect"
+      icon: "📝"
+      tier: 2
+      parent: marketing-orchestrator
+      hasSidecar: true
+
+    - id: seo-strategist
+      name: "Quinn Crawler"
+      title: "SEO Strategist"
+      icon: "🔍"
+      tier: 2
+      parent: marketing-orchestrator
+      hasSidecar: true
+
+    - id: social-media-strategist
+      name: "Nova Reach"
+      title: "Social Media Strategist"
+      icon: "📱"
+      tier: 2
+      parent: marketing-orchestrator
+      hasSidecar: true
+
+    - id: launch-coordinator
+      name: "Luna Blast"
+      title: "Launch Coordinator"
+      icon: "🚀"
+      tier: 2
+      parent: marketing-orchestrator
+      hasSidecar: true
+
+    - id: growth-analyst
+      name: "Pixel Metrics"
+      title: "Growth Analyst"
+      icon: "📊"
+      tier: 2
+      parent: marketing-orchestrator
+      hasSidecar: true
+
+    # Tier 3: Social Media Specialists
+    - id: twitter-ghostwriter
+      name: "Vex Thread"
+      title: "Twitter Ghostwriter"
+      icon: "🐦"
+      tier: 3
+      parent: social-media-strategist
+      hasSidecar: true
+
+    - id: reddit-growth-hacker
+      name: "Karma Ken"
+      title: "Reddit Growth Hacker"
+      icon: "🤖"
+      tier: 3
+      parent: social-media-strategist
+      hasSidecar: true
+
+    - id: linkedin-creator
+      name: "Ivy Pro"
+      title: "LinkedIn Creator"
+      icon: "💼"
+      tier: 3
+      parent: social-media-strategist
+      hasSidecar: true
+
+    - id: youtube-strategist
+      name: "Yuri Views"
+      title: "YouTube Strategist"
+      icon: "🎥"
+      tier: 3
+      parent: social-media-strategist
+      hasSidecar: true
+
+    - id: discord-community-manager
+      name: "Disco Dave"
+      title: "Discord Community Manager"
+      icon: "💬"
+      tier: 3
+      parent: social-media-strategist
+      hasSidecar: true
+
+    - id: instagram-strategist
+      name: "Indy Grid"
+      title: "Instagram Strategist"
+      icon: "📸"
+      tier: 3
+      parent: social-media-strategist
+      hasSidecar: true
+
+    - id: tiktok-creator
+      name: "Tikko Viral"
+      title: "TikTok Creator"
+      icon: "🎵"
+      tier: 3
+      parent: social-media-strategist
+      hasSidecar: true
+
+    - id: pinterest-strategist
+      name: "Penny Pin"
+      title: "Pinterest Strategist"
+      icon: "📌"
+      tier: 3
+      parent: social-media-strategist
+      hasSidecar: true
+
+  workflows:
+    - id: marketing-strategy
+      name: "Marketing Strategy"
+      trigger: "MS"
+      lead: marketing-orchestrator
+      description: "Comprehensive marketing strategy - orchestrates all workflows"
+
+    - id: content-pipeline
+      name: "Content Pipeline"
+      trigger: "CP"
+      lead: content-architect
+      description: "Brief → Rédaction → Publication"
+
+    - id: social-campaign
+      name: "Social Campaign"
+      trigger: "SC"
+      lead: social-media-strategist
+      description: "Multi-platform social media campaigns"
+
+    - id: launch-sequence
+      name: "Launch Sequence"
+      trigger: "LS"
+      lead: launch-coordinator
+      description: "J-14 → Launch → J+7 coordination"
+
+    - id: growth-audit
+      name: "Growth Audit"
+      trigger: "GA"
+      lead: growth-analyst
+      description: "Comprehensive KPIs audit + recommendations"
+
+    - id: seo-sprint
+      name: "SEO Sprint"
+      trigger: "SS"
+      lead: seo-strategist
+      description: "Audit → Keywords → Content gaps → Quick wins"

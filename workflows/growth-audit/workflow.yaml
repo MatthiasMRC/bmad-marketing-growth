@@ -1,0 +1,370 @@
+# Growth Audit Workflow
+# Trigger: GA
+# Lead: Pixel Metrics (Growth Analyst)
+# Description: Audit complet KPIs + recommandations
+
+workflow:
+  id: growth-audit
+  name: "Growth Audit"
+  version: "1.0.0"
+  trigger: "GA"
+  lead_agent: growth-analyst
+  description: |
+    Comprehensive growth metrics audit workflow.
+    Analyzes all marketing channels and provides actionable recommendations.
+
+# Workflow Phases
+phases:
+  # === PHASE 1: DATA COLLECTION ===
+  - id: data-collection
+    name: "Data Collection"
+    description: "Gather data from all marketing channels"
+    steps:
+      - id: audit-scope
+        name: "Define Audit Scope"
+        agent: growth-analyst
+        action: |
+          Define audit parameters:
+          - Time period (30/60/90 days)
+          - Channels to analyze
+          - Key questions to answer
+          - Success metrics to evaluate
+          - Comparison benchmarks
+        output: "audit-scope.md"
+
+      - id: analytics-data
+        name: "Website Analytics"
+        agent: growth-analyst
+        action: |
+          Collect website data:
+          - Traffic sources breakdown
+          - User behavior metrics
+          - Conversion funnels
+          - Landing page performance
+          - Technical performance
+        output: "website-analytics.md"
+
+      - id: content-performance
+        name: "Content Performance"
+        agent: content-architect
+        delegates_to: content-architect
+        action: |
+          Analyze content metrics:
+          - Top performing content
+          - Underperforming content
+          - Content by type
+          - Engagement patterns
+          - Content ROI
+        output: "content-performance.md"
+
+      - id: seo-performance
+        name: "SEO Performance"
+        agent: seo-strategist
+        delegates_to: seo-strategist
+        action: |
+          Analyze SEO metrics:
+          - Organic traffic trends
+          - Keyword rankings
+          - Backlink profile
+          - Technical SEO health
+          - Competitor SEO comparison
+        output: "seo-performance.md"
+
+      - id: social-performance
+        name: "Social Media Performance"
+        agent: social-media-strategist
+        delegates_to: social-media-strategist
+        action: |
+          Analyze social metrics:
+          - Follower growth by platform
+          - Engagement rates
+          - Top performing posts
+          - Best posting times
+          - Audience demographics
+        output: "social-performance.md"
+
+      - id: email-performance
+        name: "Email Performance"
+        agent: growth-analyst
+        action: |
+          Analyze email metrics:
+          - List growth
+          - Open rates
+          - Click rates
+          - Conversion rates
+          - Unsubscribe trends
+        output: "email-performance.md"
+
+  # === PHASE 2: ANALYSIS ===
+  - id: analysis
+    name: "Deep Analysis"
+    description: "Analyze collected data for insights"
+    steps:
+      - id: funnel-analysis
+        name: "Funnel Analysis"
+        agent: growth-analyst
+        action: |
+          Analyze conversion funnel:
+          - Stage-by-stage conversion
+          - Drop-off points
+          - Attribution modeling
+          - Customer journey mapping
+          - Bottleneck identification
+        output: "funnel-analysis.md"
+
+      - id: channel-roi
+        name: "Channel ROI Analysis"
+        agent: growth-analyst
+        action: |
+          Calculate channel ROI:
+          - Cost per acquisition by channel
+          - Revenue attribution
+          - Channel efficiency
+          - Investment vs. return
+          - Channel synergies
+        output: "channel-roi.md"
+
+      - id: cohort-analysis
+        name: "Cohort Analysis"
+        agent: growth-analyst
+        action: |
+          Analyze user cohorts:
+          - Acquisition cohorts
+          - Retention curves
+          - LTV by cohort
+          - Behavior patterns
+          - Predictive insights
+        output: "cohort-analysis.md"
+
+      - id: competitive-analysis
+        name: "Competitive Benchmarking"
+        agent: growth-analyst
+        action: |
+          Benchmark against competitors:
+          - Traffic comparison
+          - Social following comparison
+          - Content output comparison
+          - SEO position comparison
+          - Market share estimates
+        output: "competitive-benchmarking.md"
+
+  # === PHASE 3: DIAGNOSIS ===
+  - id: diagnosis
+    name: "Problem Diagnosis"
+    description: "Identify issues and opportunities"
+    steps:
+      - id: strengths
+        name: "Identify Strengths"
+        agent: growth-analyst
+        action: |
+          Document what's working:
+          - High-performing channels
+          - Successful content types
+          - Effective campaigns
+          - Strong conversion points
+          - Competitive advantages
+        output: "strengths.md"
+
+      - id: weaknesses
+        name: "Identify Weaknesses"
+        agent: growth-analyst
+        action: |
+          Document problem areas:
+          - Underperforming channels
+          - Conversion blockers
+          - Content gaps
+          - Technical issues
+          - Resource inefficiencies
+        output: "weaknesses.md"
+
+      - id: opportunities
+        name: "Identify Opportunities"
+        agent: growth-analyst
+        action: |
+          Document growth opportunities:
+          - Untapped channels
+          - Audience segments
+          - Content opportunities
+          - Conversion optimizations
+          - Quick wins
+        output: "opportunities.md"
+
+      - id: threats
+        name: "Identify Threats"
+        agent: growth-analyst
+        action: |
+          Document risks and threats:
+          - Competitive threats
+          - Platform risks
+          - Dependency issues
+          - Market changes
+          - Sustainability concerns
+        output: "threats.md"
+
+  # === PHASE 4: RECOMMENDATIONS ===
+  - id: recommendations
+    name: "Strategic Recommendations"
+    description: "Develop actionable recommendations"
+    steps:
+      - id: quick-wins
+        name: "Quick Wins"
+        agent: growth-analyst
+        action: |
+          Identify quick wins:
+          - Low effort, high impact actions
+          - Immediate optimizations
+          - Easy fixes
+          - Week 1 priorities
+        output: "quick-wins.md"
+
+      - id: strategic-initiatives
+        name: "Strategic Initiatives"
+        agent: growth-analyst
+        action: |
+          Define strategic initiatives:
+          - 90-day priorities
+          - Resource requirements
+          - Expected impact
+          - Success metrics
+        output: "strategic-initiatives.md"
+
+      - id: resource-allocation
+        name: "Resource Recommendations"
+        agent: growth-analyst
+        action: |
+          Recommend resource allocation:
+          - Channel budget allocation
+          - Team focus areas
+          - Tool recommendations
+          - Outsourcing suggestions
+        output: "resource-recommendations.md"
+
+      - id: kpi-framework
+        name: "KPI Framework"
+        agent: growth-analyst
+        action: |
+          Propose KPI framework:
+          - North star metric
+          - Leading indicators
+          - Lagging indicators
+          - Tracking cadence
+          - Reporting structure
+        output: "kpi-framework.md"
+
+  # === PHASE 5: REPORTING ===
+  - id: reporting
+    name: "Audit Report"
+    description: "Compile comprehensive audit report"
+    steps:
+      - id: executive-summary
+        name: "Executive Summary"
+        agent: growth-analyst
+        action: |
+          Create executive summary:
+          - Key findings (3-5)
+          - Critical issues
+          - Top opportunities
+          - Recommended priorities
+          - Expected outcomes
+        output: "executive-summary.md"
+
+      - id: full-report
+        name: "Full Audit Report"
+        agent: growth-analyst
+        action: |
+          Compile full report:
+          - Executive summary
+          - Current state analysis
+          - SWOT analysis
+          - Channel deep-dives
+          - Recommendations
+          - Action plan
+          - Appendices
+        output: "growth-audit-report.md"
+
+      - id: presentation
+        name: "Report Presentation"
+        agent: growth-analyst
+        action: |
+          Present to stakeholders:
+          - Walk through findings
+          - Discuss recommendations
+          - Answer questions
+          - Agree on priorities
+          - Define next steps
+        output: "audit-presentation.md"
+
+# Workflow Outputs
+outputs:
+  primary: "growth-audit-report.md"
+  supporting:
+    - "audit-scope.md"
+    - "website-analytics.md"
+    - "content-performance.md"
+    - "seo-performance.md"
+    - "social-performance.md"
+    - "funnel-analysis.md"
+    - "channel-roi.md"
+    - "quick-wins.md"
+    - "strategic-initiatives.md"
+    - "kpi-framework.md"
+
+# Audit Types
+audit_types:
+  - id: full-audit
+    name: "Full Growth Audit"
+    scope: "All channels"
+    duration: "5-7 days"
+
+  - id: channel-audit
+    name: "Channel-Specific Audit"
+    scope: "Single channel deep-dive"
+    duration: "2-3 days"
+
+  - id: quick-audit
+    name: "Quick Health Check"
+    scope: "High-level overview"
+    duration: "1 day"
+
+# Metrics Framework
+metrics:
+  awareness:
+    - "Website traffic"
+    - "Brand mentions"
+    - "Social reach"
+    - "Share of voice"
+
+  acquisition:
+    - "New visitors"
+    - "Lead generation"
+    - "Email signups"
+    - "Trial starts"
+
+  activation:
+    - "Onboarding completion"
+    - "First value moment"
+    - "Feature adoption"
+
+  retention:
+    - "Return visits"
+    - "Email engagement"
+    - "Product usage"
+
+  revenue:
+    - "Conversion rate"
+    - "Average order value"
+    - "Customer lifetime value"
+
+  referral:
+    - "NPS score"
+    - "Referral rate"
+    - "Social shares"
+
+# Success Criteria
+success_criteria:
+  - "All data sources analyzed"
+  - "SWOT analysis completed"
+  - "Quick wins identified"
+  - "Strategic recommendations provided"
+  - "KPI framework proposed"
+  - "Stakeholders aligned on priorities"

@@ -1,0 +1,258 @@
+# Content Pipeline Workflow
+# Trigger: CP
+# Lead: Milo Page (Content Architect)
+# Description: Brief → Rédaction → Publication content workflow
+
+workflow:
+  id: content-pipeline
+  name: "Content Pipeline"
+  version: "1.0.0"
+  trigger: "CP"
+  lead_agent: content-architect
+  description: |
+    End-to-end content creation workflow from brief to publication.
+    Manages the full content lifecycle with quality gates.
+
+# Workflow Phases
+phases:
+  # === PHASE 1: BRIEF ===
+  - id: brief
+    name: "Content Brief"
+    description: "Define content requirements and specifications"
+    steps:
+      - id: content-request
+        name: "Content Request Intake"
+        agent: content-architect
+        action: |
+          Gather from user:
+          - Content type (blog, guide, case study, etc.)
+          - Target topic/keyword
+          - Target audience
+          - Business objective
+          - Desired length
+          - Deadline
+        output: "content-request.md"
+
+      - id: keyword-research
+        name: "Keyword & Topic Research"
+        agent: seo-strategist
+        delegates_to: seo-strategist
+        action: |
+          Research:
+          - Primary keyword
+          - Secondary keywords
+          - Search intent
+          - Competitor content analysis
+          - Content gap opportunities
+        output: "keyword-research.md"
+
+      - id: content-brief
+        name: "Create Content Brief"
+        agent: content-architect
+        action: |
+          Create detailed brief:
+          - Headline options (5)
+          - Target keyword and semantics
+          - Content outline (H2s, H3s)
+          - Key points to cover
+          - Internal/external link suggestions
+          - CTA strategy
+          - Word count target
+          - Tone and style notes
+        output: "content-brief.md"
+
+      - id: brief-approval
+        name: "Brief Approval"
+        agent: content-architect
+        action: |
+          Present brief to user:
+          - Review headline options
+          - Validate outline
+          - Confirm direction
+          - Get approval to proceed
+        gate: "user_approval"
+
+  # === PHASE 2: CRÉATION ===
+  - id: creation
+    name: "Content Creation"
+    description: "Write and refine content"
+    steps:
+      - id: first-draft
+        name: "First Draft"
+        agent: content-architect
+        action: |
+          Write content following brief:
+          - Follow approved outline
+          - Integrate keywords naturally
+          - Include internal links
+          - Write compelling intro
+          - Craft strong conclusion
+          - Add CTA
+        output: "draft-v1.md"
+
+      - id: seo-optimization
+        name: "SEO Optimization"
+        agent: seo-strategist
+        delegates_to: seo-strategist
+        action: |
+          Optimize draft for SEO:
+          - Meta title and description
+          - Header tag optimization
+          - Keyword density check
+          - Image alt text
+          - Schema markup suggestions
+          - Internal linking audit
+        output: "seo-optimizations.md"
+
+      - id: content-revision
+        name: "Content Revision"
+        agent: content-architect
+        action: |
+          Apply SEO feedback:
+          - Integrate optimizations
+          - Polish writing
+          - Check flow and readability
+          - Verify accuracy
+        output: "draft-v2.md"
+
+      - id: content-review
+        name: "Content Review"
+        agent: content-architect
+        action: |
+          Present to user:
+          - Share draft for review
+          - Gather feedback
+          - Make revisions
+          - Get final approval
+        gate: "user_approval"
+        output: "draft-final.md"
+
+  # === PHASE 3: PUBLICATION ===
+  - id: publication
+    name: "Publication & Distribution"
+    description: "Publish and promote content"
+    steps:
+      - id: publish-prep
+        name: "Publication Preparation"
+        agent: content-architect
+        action: |
+          Prepare for publication:
+          - Final formatting
+          - Image selection/creation brief
+          - Featured image specs
+          - Category/tag assignment
+          - Publication date
+        output: "publish-checklist.md"
+
+      - id: social-distribution
+        name: "Social Distribution Plan"
+        agent: social-media-strategist
+        delegates_to: social-media-strategist
+        action: |
+          Create distribution plan:
+          - Platform-specific posts
+          - Posting schedule
+          - Engagement strategy
+          - Repurposing opportunities
+        output: "distribution-plan.md"
+
+      - id: publication
+        name: "Content Publication"
+        agent: content-architect
+        action: |
+          Execute publication:
+          - Publish content
+          - Submit to search console
+          - Share on social (via distribution plan)
+          - Notify relevant stakeholders
+        output: "publication-confirmation.md"
+
+  # === PHASE 4: MONITORING ===
+  - id: monitoring
+    name: "Performance Monitoring"
+    description: "Track content performance"
+    steps:
+      - id: initial-tracking
+        name: "Initial Performance Check"
+        agent: growth-analyst
+        delegates_to: growth-analyst
+        action: |
+          Set up tracking:
+          - Verify analytics
+          - Note baseline metrics
+          - Schedule follow-up review
+        output: "tracking-setup.md"
+
+      - id: performance-review
+        name: "30-Day Performance Review"
+        agent: growth-analyst
+        delegates_to: growth-analyst
+        trigger: "scheduled_30_days"
+        action: |
+          Analyze performance:
+          - Traffic metrics
+          - Engagement metrics
+          - Conversion data
+          - SEO ranking progress
+          - Recommendations for optimization
+        output: "performance-report.md"
+
+# Workflow Outputs
+outputs:
+  primary: "draft-final.md"
+  supporting:
+    - "content-request.md"
+    - "keyword-research.md"
+    - "content-brief.md"
+    - "seo-optimizations.md"
+    - "distribution-plan.md"
+    - "publication-confirmation.md"
+    - "performance-report.md"
+
+# Quality Gates
+gates:
+  - id: brief_approval
+    phase: brief
+    description: "User approves content brief before writing begins"
+    required: true
+
+  - id: content_approval
+    phase: creation
+    description: "User approves final draft before publication"
+    required: true
+
+# Content Types Supported
+content_types:
+  - id: blog-post
+    name: "Blog Post"
+    word_count: "1000-2000"
+    timeline: "3-5 days"
+
+  - id: long-form-guide
+    name: "Long-Form Guide"
+    word_count: "3000-5000"
+    timeline: "7-10 days"
+
+  - id: case-study
+    name: "Case Study"
+    word_count: "1500-2500"
+    timeline: "5-7 days"
+
+  - id: landing-page
+    name: "Landing Page Copy"
+    word_count: "500-1000"
+    timeline: "2-3 days"
+
+  - id: email-sequence
+    name: "Email Sequence"
+    word_count: "200-400 per email"
+    timeline: "3-5 days"
+
+# Success Criteria
+success_criteria:
+  - "Content brief approved before writing"
+  - "SEO optimization applied"
+  - "Final content approved by user"
+  - "Content published successfully"
+  - "Distribution executed on schedule"
+  - "Performance tracking active"

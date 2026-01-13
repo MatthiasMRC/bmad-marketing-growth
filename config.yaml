@@ -1,0 +1,256 @@
+# Marketing Growth Module Configuration
+# Module: marketing-growth
+# Version: 1.0.0
+# Description: Complete marketing growth suite with 14 specialized agents
+
+module:
+  id: marketing-growth
+  name: "Marketing Growth Suite"
+  description: "Comprehensive AI-powered marketing team for SaaS growth. Includes strategy, content, social media, SEO, launches, and analytics."
+  version: "1.0.0"
+  author: "BMad Framework"
+
+# Core Configuration Values (customizable per project)
+user_name: "{user_name}"
+communication_language: French
+document_output_language: English
+output_folder: "{project-root}/_bmad-output/marketing-growth"
+
+# Agent Hierarchy
+agents:
+  # === TIER 1: ORCHESTRATOR ===
+  orchestrator:
+    id: marketing-orchestrator
+    name: "Max Growth"
+    title: "Marketing Orchestrator"
+    icon: "🎯"
+    description: "Strategic marketing leader who coordinates all marketing activities and delegates to specialists."
+    hasSidecar: true
+    children:
+      - content-architect
+      - seo-strategist
+      - social-media-strategist
+      - launch-coordinator
+      - growth-analyst
+
+  # === TIER 2: DEPARTMENT LEADS ===
+  leads:
+    - id: content-architect
+      name: "Milo Page"
+      title: "Content Architect"
+      icon: "📝"
+      description: "Content strategy and creation expert"
+      hasSidecar: true
+      parent: marketing-orchestrator
+
+    - id: seo-strategist
+      name: "Quinn Crawler"
+      title: "SEO Strategist"
+      icon: "🔍"
+      description: "Search engine optimization specialist"
+      hasSidecar: true
+      parent: marketing-orchestrator
+
+    - id: social-media-strategist
+      name: "Nova Reach"
+      title: "Social Media Strategist"
+      icon: "📱"
+      description: "Social media strategy and coordination lead"
+      hasSidecar: true
+      parent: marketing-orchestrator
+      children:
+        - twitter-ghostwriter
+        - reddit-growth-hacker
+        - linkedin-creator
+        - youtube-strategist
+        - discord-community-manager
+        - instagram-strategist
+        - tiktok-creator
+        - pinterest-strategist
+
+    - id: launch-coordinator
+      name: "Luna Blast"
+      title: "Launch Coordinator"
+      icon: "🚀"
+      description: "Product launch and campaign orchestration"
+      hasSidecar: true
+      parent: marketing-orchestrator
+
+    - id: growth-analyst
+      name: "Pixel Metrics"
+      title: "Growth Analyst"
+      icon: "📊"
+      description: "Analytics, metrics, and growth tracking"
+      hasSidecar: true
+      parent: marketing-orchestrator
+
+  # === TIER 3: SOCIAL MEDIA SPECIALISTS (under Nova Reach) ===
+  specialists:
+    - id: twitter-ghostwriter
+      name: "Vex Thread"
+      title: "Twitter Ghostwriter"
+      icon: "🐦"
+      description: "Twitter/X viral content and personal branding"
+      hasSidecar: true
+      parent: social-media-strategist
+
+    - id: reddit-growth-hacker
+      name: "Karma Ken"
+      title: "Reddit Growth Hacker"
+      icon: "🤖"
+      description: "Reddit community marketing and karma building"
+      hasSidecar: true
+      parent: social-media-strategist
+
+    - id: linkedin-creator
+      name: "Ivy Pro"
+      title: "LinkedIn Creator"
+      icon: "💼"
+      description: "LinkedIn B2B content and thought leadership"
+      hasSidecar: true
+      parent: social-media-strategist
+
+    - id: youtube-strategist
+      name: "Yuri Views"
+      title: "YouTube Strategist"
+      icon: "🎥"
+      description: "YouTube growth and video SEO"
+      hasSidecar: true
+      parent: social-media-strategist
+
+    - id: discord-community-manager
+      name: "Disco Dave"
+      title: "Discord Community Manager"
+      icon: "💬"
+      description: "Discord community building and engagement"
+      hasSidecar: true
+      parent: social-media-strategist
+
+    - id: instagram-strategist
+      name: "Indy Grid"
+      title: "Instagram Strategist"
+      icon: "📸"
+      description: "Instagram visual content and Reels strategy"
+      hasSidecar: true
+      parent: social-media-strategist
+
+    - id: tiktok-creator
+      name: "Tikko Viral"
+      title: "TikTok Creator"
+      icon: "🎵"
+      description: "TikTok viral content and short-form video"
+      hasSidecar: true
+      parent: social-media-strategist
+
+    - id: pinterest-strategist
+      name: "Penny Pin"
+      title: "Pinterest Strategist"
+      icon: "📌"
+      description: "Pinterest SEO and evergreen traffic"
+      hasSidecar: true
+      parent: social-media-strategist
+
+# Module Workflows
+workflows:
+  - id: marketing-strategy
+    name: "Marketing Strategy"
+    description: "Develop comprehensive marketing strategy - orchestrates all other workflows"
+    trigger: "MS"
+    lead: marketing-orchestrator
+    path: "workflows/marketing-strategy/workflow.yaml"
+
+  - id: content-pipeline
+    name: "Content Pipeline"
+    description: "Brief → Rédaction → Publication content workflow"
+    trigger: "CP"
+    lead: content-architect
+    path: "workflows/content-pipeline/workflow.yaml"
+
+  - id: social-campaign
+    name: "Social Media Campaign"
+    description: "Stratégie → Création → Publication multi-plateforme"
+    trigger: "SC"
+    lead: social-media-strategist
+    path: "workflows/social-campaign/workflow.yaml"
+
+  - id: launch-sequence
+    name: "Launch Sequence"
+    description: "J-14 → Launch → J+7 post-launch coordination"
+    trigger: "LS"
+    lead: launch-coordinator
+    path: "workflows/launch-sequence/workflow.yaml"
+
+  - id: growth-audit
+    name: "Growth Audit"
+    description: "Comprehensive KPIs audit + recommendations"
+    trigger: "GA"
+    lead: growth-analyst
+    path: "workflows/growth-audit/workflow.yaml"
+
+  - id: seo-sprint
+    name: "SEO Sprint"
+    description: "Audit → Keywords → Content gaps → Quick wins"
+    trigger: "SS"
+    lead: seo-strategist
+    path: "workflows/seo-sprint/workflow.yaml"
+
+# Installation Configuration
+install:
+  description: "Marketing Growth Suite - Complete AI marketing team"
+  questions:
+    - var: user_name
+      prompt: "What's your name?"
+      type: text
+      default: "Marketing Lead"
+
+    - var: communication_language
+      prompt: "Preferred communication language?"
+      type: select
+      options:
+        - label: "English"
+          value: "English"
+        - label: "Français"
+          value: "French"
+        - label: "Español"
+          value: "Spanish"
+      default: "French"
+
+    - var: company_name
+      prompt: "Your company/product name?"
+      type: text
+      default: "My SaaS"
+
+    - var: primary_channel
+      prompt: "Primary social media channel?"
+      type: select
+      options:
+        - label: "Twitter/X"
+          value: "twitter"
+        - label: "LinkedIn"
+          value: "linkedin"
+        - label: "YouTube"
+          value: "youtube"
+        - label: "Instagram"
+          value: "instagram"
+        - label: "TikTok"
+          value: "tiktok"
+      default: "twitter"
+
+# Memory Paths (at runtime)
+memory:
+  base_path: "{project-root}/_bmad/_memory"
+  agents:
+    - "{base_path}/marketing-orchestrator-sidecar/"
+    - "{base_path}/content-architect-sidecar/"
+    - "{base_path}/seo-strategist-sidecar/"
+    - "{base_path}/social-media-strategist-sidecar/"
+    - "{base_path}/launch-coordinator-sidecar/"
+    - "{base_path}/growth-analyst-sidecar/"
+    - "{base_path}/twitter-ghostwriter-sidecar/"
+    - "{base_path}/reddit-growth-hacker-sidecar/"
+    - "{base_path}/linkedin-creator-sidecar/"
+    - "{base_path}/youtube-strategist-sidecar/"
+    - "{base_path}/discord-community-manager-sidecar/"
+    - "{base_path}/instagram-strategist-sidecar/"
+    - "{base_path}/tiktok-creator-sidecar/"
+    - "{base_path}/pinterest-strategist-sidecar/"

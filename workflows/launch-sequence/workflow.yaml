@@ -1,0 +1,346 @@
+# Launch Sequence Workflow
+# Trigger: LS
+# Lead: Luna Blast (Launch Coordinator)
+# Description: J-14 → Launch → J+7 post-launch coordination
+
+workflow:
+  id: launch-sequence
+  name: "Launch Sequence"
+  version: "1.0.0"
+  trigger: "LS"
+  lead_agent: launch-coordinator
+  description: |
+    Comprehensive product/feature launch workflow.
+    Coordinates all marketing activities from J-14 to J+7.
+
+# Timeline Overview
+timeline:
+  pre_launch: "J-14 to J-1"
+  launch_day: "J-Day"
+  post_launch: "J+1 to J+7"
+
+# Workflow Phases
+phases:
+  # === PHASE 1: J-14 TO J-7 (PREPARATION) ===
+  - id: preparation
+    name: "Launch Preparation (J-14 to J-7)"
+    description: "Prepare all launch assets and strategies"
+    steps:
+      - id: launch-brief
+        name: "Launch Brief"
+        agent: launch-coordinator
+        timeline: "J-14"
+        action: |
+          Define launch parameters:
+          - Product/feature being launched
+          - Launch date and time
+          - Target audience segments
+          - Key messaging and positioning
+          - Success metrics
+          - Budget allocation
+        output: "launch-brief.md"
+
+      - id: asset-inventory
+        name: "Asset Inventory"
+        agent: launch-coordinator
+        timeline: "J-14"
+        action: |
+          Identify required assets:
+          - Landing page(s)
+          - Email sequences
+          - Social media content
+          - Press release
+          - Demo/tutorial videos
+          - Sales enablement materials
+        output: "asset-checklist.md"
+
+      - id: content-creation
+        name: "Launch Content Creation"
+        agent: content-architect
+        delegates_to: content-architect
+        timeline: "J-14 to J-10"
+        action: |
+          Create core content:
+          - Landing page copy
+          - Blog announcement
+          - Email sequence (5-7 emails)
+          - FAQ document
+        output: "launch-content.md"
+
+      - id: social-content
+        name: "Social Launch Content"
+        agent: social-media-strategist
+        delegates_to: social-media-strategist
+        timeline: "J-10 to J-7"
+        action: |
+          Create social content:
+          - Teaser posts (J-7 to J-1)
+          - Launch day posts
+          - Post-launch follow-up
+          - Engagement templates
+        output: "social-launch-content.md"
+
+      - id: seo-optimization
+        name: "SEO Preparation"
+        agent: seo-strategist
+        delegates_to: seo-strategist
+        timeline: "J-10"
+        action: |
+          Optimize for search:
+          - Landing page SEO
+          - Blog post optimization
+          - Schema markup
+          - Internal linking plan
+        output: "seo-launch-prep.md"
+
+  # === PHASE 2: J-7 TO J-1 (PRE-LAUNCH) ===
+  - id: pre_launch
+    name: "Pre-Launch (J-7 to J-1)"
+    description: "Build anticipation and final preparations"
+    steps:
+      - id: teaser-campaign
+        name: "Teaser Campaign"
+        agent: social-media-strategist
+        delegates_to: social-media-strategist
+        timeline: "J-7 to J-1"
+        action: |
+          Execute teaser strategy:
+          - Daily teaser posts
+          - Email teaser (J-7)
+          - Countdown content
+          - Audience warming
+        output: "teaser-execution.md"
+
+      - id: influencer-outreach
+        name: "Influencer/Partner Outreach"
+        agent: launch-coordinator
+        timeline: "J-7 to J-3"
+        action: |
+          Coordinate external support:
+          - Influencer briefings
+          - Partner notifications
+          - Press outreach
+          - Affiliate preparation
+        output: "outreach-status.md"
+
+      - id: technical-check
+        name: "Technical Readiness"
+        agent: launch-coordinator
+        timeline: "J-2"
+        action: |
+          Verify technical readiness:
+          - Landing page live check
+          - Analytics tracking
+          - Email automation
+          - Payment processing (if applicable)
+          - Server capacity
+        output: "technical-checklist.md"
+
+      - id: team-briefing
+        name: "Team Briefing"
+        agent: launch-coordinator
+        timeline: "J-1"
+        action: |
+          Final team alignment:
+          - Launch day schedule
+          - Role assignments
+          - Communication channels
+          - Escalation procedures
+          - Go/no-go decision
+        gate: "go_no_go"
+        output: "team-briefing.md"
+
+  # === PHASE 3: LAUNCH DAY (J-DAY) ===
+  - id: launch_day
+    name: "Launch Day (J-Day)"
+    description: "Execute launch with coordinated activities"
+    steps:
+      - id: morning-activation
+        name: "Morning Activation"
+        agent: launch-coordinator
+        timeline: "J-Day 06:00"
+        action: |
+          Early morning tasks:
+          - Verify all systems
+          - Activate landing page
+          - Send first email blast
+          - Publish blog post
+          - Final social media check
+        output: "morning-activation.md"
+
+      - id: social-blitz
+        name: "Social Media Blitz"
+        agent: social-media-strategist
+        delegates_to: social-media-strategist
+        timeline: "J-Day"
+        action: |
+          Execute social strategy:
+          - Launch announcement posts
+          - Thread/carousel publishing
+          - Community engagement
+          - Influencer coordination
+          - Real-time monitoring
+        output: "social-execution.md"
+
+      - id: launch-monitoring
+        name: "Launch Monitoring"
+        agent: growth-analyst
+        delegates_to: growth-analyst
+        timeline: "J-Day (ongoing)"
+        action: |
+          Real-time monitoring:
+          - Traffic tracking
+          - Conversion monitoring
+          - Social engagement
+          - Error detection
+          - Hourly updates
+        output: "launch-monitoring.md"
+
+      - id: community-engagement
+        name: "Community Engagement"
+        agent: social-media-strategist
+        delegates_to: social-media-strategist
+        timeline: "J-Day (ongoing)"
+        action: |
+          Active engagement:
+          - Respond to comments
+          - Answer questions
+          - Share user reactions
+          - Handle any issues
+        output: "engagement-log.md"
+
+      - id: end-of-day-review
+        name: "End of Day Review"
+        agent: launch-coordinator
+        timeline: "J-Day 22:00"
+        action: |
+          Day 1 assessment:
+          - Metrics summary
+          - Wins and challenges
+          - Next day priorities
+          - Team appreciation
+        output: "day1-review.md"
+
+  # === PHASE 4: POST-LAUNCH (J+1 TO J+7) ===
+  - id: post_launch
+    name: "Post-Launch (J+1 to J+7)"
+    description: "Maintain momentum and optimize"
+    steps:
+      - id: follow-up-emails
+        name: "Follow-Up Email Sequence"
+        agent: content-architect
+        delegates_to: content-architect
+        timeline: "J+1 to J+7"
+        action: |
+          Execute email sequence:
+          - Day 2: Social proof
+          - Day 3: Feature highlight
+          - Day 5: Use case story
+          - Day 7: Limited time offer (if applicable)
+        output: "email-sequence-status.md"
+
+      - id: social-momentum
+        name: "Social Momentum"
+        agent: social-media-strategist
+        delegates_to: social-media-strategist
+        timeline: "J+1 to J+7"
+        action: |
+          Maintain social presence:
+          - Share user testimonials
+          - Behind-the-scenes content
+          - Q&A sessions
+          - Feature spotlights
+        output: "post-launch-social.md"
+
+      - id: feedback-collection
+        name: "Feedback Collection"
+        agent: launch-coordinator
+        timeline: "J+3"
+        action: |
+          Gather feedback:
+          - User surveys
+          - Support ticket analysis
+          - Social listening
+          - Team retrospective inputs
+        output: "feedback-summary.md"
+
+      - id: optimization
+        name: "Optimization Actions"
+        agent: launch-coordinator
+        timeline: "J+3 to J+7"
+        action: |
+          Optimize based on data:
+          - Landing page tweaks
+          - Ad creative adjustments
+          - Messaging refinements
+          - Conversion optimization
+        output: "optimization-actions.md"
+
+      - id: final-report
+        name: "Launch Final Report"
+        agent: growth-analyst
+        delegates_to: growth-analyst
+        timeline: "J+7"
+        action: |
+          Comprehensive launch report:
+          - Goal vs. actual performance
+          - Channel breakdown
+          - ROI analysis
+          - Key learnings
+          - Recommendations
+        output: "launch-final-report.md"
+
+# Workflow Outputs
+outputs:
+  primary: "launch-final-report.md"
+  supporting:
+    - "launch-brief.md"
+    - "asset-checklist.md"
+    - "launch-content.md"
+    - "social-launch-content.md"
+    - "team-briefing.md"
+    - "day1-review.md"
+    - "feedback-summary.md"
+
+# Launch Types
+launch_types:
+  - id: product-launch
+    name: "New Product Launch"
+    intensity: "high"
+    duration: "21 days"
+
+  - id: feature-launch
+    name: "Feature Launch"
+    intensity: "medium"
+    duration: "14 days"
+
+  - id: update-launch
+    name: "Major Update"
+    intensity: "low"
+    duration: "7 days"
+
+  - id: campaign-launch
+    name: "Campaign Launch"
+    intensity: "medium"
+    duration: "14 days"
+
+# Quality Gates
+gates:
+  - id: go_no_go
+    phase: pre_launch
+    description: "Final go/no-go decision before launch"
+    required: true
+    criteria:
+      - "All assets ready and approved"
+      - "Technical systems verified"
+      - "Team aligned and ready"
+      - "No blocking issues"
+
+# Success Criteria
+success_criteria:
+  - "All pre-launch assets completed on time"
+  - "Launch day executed without major issues"
+  - "Engagement targets met"
+  - "Conversion goals achieved"
+  - "Post-launch momentum maintained"
+  - "Final report delivered with learnings"

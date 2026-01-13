@@ -1,0 +1,218 @@
+# Marketing Strategy Workflow
+# Trigger: MS
+# Lead: Max Growth (Marketing Orchestrator)
+# Description: Master workflow that orchestrates comprehensive marketing strategy
+
+workflow:
+  id: marketing-strategy
+  name: "Marketing Strategy"
+  version: "1.0.0"
+  trigger: "MS"
+  lead_agent: marketing-orchestrator
+  description: |
+    Comprehensive marketing strategy development workflow.
+    Orchestrates all department leads to create a unified marketing plan.
+
+# Workflow Phases
+phases:
+  # === PHASE 1: DISCOVERY ===
+  - id: discovery
+    name: "Discovery & Analysis"
+    description: "Gather context, analyze market, identify opportunities"
+    steps:
+      - id: context-gathering
+        name: "Gather Business Context"
+        agent: marketing-orchestrator
+        action: |
+          Interview user to understand:
+          - Product/service offering
+          - Target audience (ICP)
+          - Current marketing status
+          - Goals and objectives
+          - Budget constraints
+          - Timeline expectations
+        output: "context-brief.md"
+
+      - id: market-analysis
+        name: "Market & Competitor Analysis"
+        agent: growth-analyst
+        action: |
+          Analyze:
+          - Market size and trends
+          - Competitor landscape
+          - Positioning opportunities
+          - Channel effectiveness benchmarks
+        output: "market-analysis.md"
+
+      - id: current-state-audit
+        name: "Current Marketing Audit"
+        agent: growth-analyst
+        action: |
+          Audit existing:
+          - Website performance
+          - Content assets
+          - Social media presence
+          - SEO standing
+          - Email list and engagement
+        output: "current-state-audit.md"
+
+  # === PHASE 2: STRATEGY DEVELOPMENT ===
+  - id: strategy
+    name: "Strategy Development"
+    description: "Define strategy across all marketing pillars"
+    steps:
+      - id: positioning
+        name: "Positioning & Messaging"
+        agent: marketing-orchestrator
+        action: |
+          Define:
+          - Unique value proposition
+          - Key messaging pillars
+          - Brand voice and tone
+          - Competitive differentiation
+        output: "positioning-strategy.md"
+
+      - id: content-strategy
+        name: "Content Strategy"
+        agent: content-architect
+        delegates_to: content-architect
+        action: |
+          Create:
+          - Content pillars
+          - Content types and formats
+          - Editorial calendar framework
+          - Distribution strategy
+        output: "content-strategy.md"
+
+      - id: seo-strategy
+        name: "SEO Strategy"
+        agent: seo-strategist
+        delegates_to: seo-strategist
+        action: |
+          Define:
+          - Target keyword clusters
+          - Technical SEO priorities
+          - Link building approach
+          - Content gap opportunities
+        output: "seo-strategy.md"
+
+      - id: social-strategy
+        name: "Social Media Strategy"
+        agent: social-media-strategist
+        delegates_to: social-media-strategist
+        action: |
+          Plan:
+          - Platform prioritization
+          - Content mix per platform
+          - Engagement strategy
+          - Community building approach
+        output: "social-strategy.md"
+
+  # === PHASE 3: PLANNING ===
+  - id: planning
+    name: "Action Planning"
+    description: "Create detailed execution plans"
+    steps:
+      - id: quarterly-plan
+        name: "Quarterly Marketing Plan"
+        agent: marketing-orchestrator
+        action: |
+          Consolidate into 90-day plan:
+          - Monthly themes
+          - Key campaigns
+          - Resource allocation
+          - Milestone targets
+        output: "quarterly-plan.md"
+
+      - id: launch-planning
+        name: "Launch & Campaign Planning"
+        agent: launch-coordinator
+        delegates_to: launch-coordinator
+        action: |
+          If applicable, plan:
+          - Product launches
+          - Major campaigns
+          - Promotional calendar
+        output: "launch-calendar.md"
+
+      - id: metrics-framework
+        name: "KPIs & Metrics Framework"
+        agent: growth-analyst
+        delegates_to: growth-analyst
+        action: |
+          Define:
+          - North star metric
+          - Leading indicators
+          - Tracking setup
+          - Reporting cadence
+        output: "metrics-framework.md"
+
+  # === PHASE 4: SYNTHESIS ===
+  - id: synthesis
+    name: "Strategy Synthesis"
+    description: "Compile final marketing strategy document"
+    steps:
+      - id: compile-strategy
+        name: "Compile Marketing Strategy"
+        agent: marketing-orchestrator
+        action: |
+          Synthesize all outputs into:
+          - Executive summary
+          - Strategy overview
+          - Channel strategies
+          - 90-day action plan
+          - KPIs and success metrics
+          - Budget allocation
+        output: "marketing-strategy-v1.md"
+
+      - id: review-approval
+        name: "Strategy Review"
+        agent: marketing-orchestrator
+        action: |
+          Present strategy to user:
+          - Walk through key decisions
+          - Gather feedback
+          - Refine as needed
+          - Get approval to proceed
+        output: "strategy-approved.md"
+
+# Workflow Outputs
+outputs:
+  primary: "marketing-strategy-v1.md"
+  supporting:
+    - "context-brief.md"
+    - "market-analysis.md"
+    - "current-state-audit.md"
+    - "positioning-strategy.md"
+    - "content-strategy.md"
+    - "seo-strategy.md"
+    - "social-strategy.md"
+    - "quarterly-plan.md"
+    - "launch-calendar.md"
+    - "metrics-framework.md"
+
+# Success Criteria
+success_criteria:
+  - "Clear positioning and messaging defined"
+  - "All channel strategies documented"
+  - "90-day action plan created"
+  - "KPIs and tracking framework established"
+  - "User approval obtained"
+
+# Delegation Rules
+delegation:
+  content_architect:
+    triggers: ["content strategy", "editorial", "blog", "articles"]
+    workflow: "content-pipeline"
+  seo_strategist:
+    triggers: ["seo", "keywords", "search", "rankings"]
+    workflow: "seo-sprint"
+  social_media_strategist:
+    triggers: ["social media", "twitter", "linkedin", "campaigns"]
+    workflow: "social-campaign"
+  launch_coordinator:
+    triggers: ["launch", "product release", "campaign"]
+    workflow: "launch-sequence"
+  growth_analyst:
+    triggers: ["metrics", "analytics", "kpis", "audit"]
+    workflow: "growth-audit"
